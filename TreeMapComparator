@@ -1,0 +1,20 @@
+import java.util.*;
+
+public class CustomComparatorMapExample {
+    public static void main(String[] args) {
+
+        Comparator<String> reverseOrder = (s1, s2) -> s2.compareTo(s1);
+
+       
+        Map<String, Integer> map = new TreeMap<>(reverseOrder);
+        map.put("Banana", 2);
+        map.put("Apple", 5);
+        map.put("Mango", 3);
+        map.put("Grapes", 4);
+
+        System.out.println("Sorted TreeMap (reverse order by key):");
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+    }
+}
