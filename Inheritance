@@ -1,21 +1,93 @@
 
 class Animal {
-    void makeSound() {
-        System.out.println("Animal makes sound");
+    protected String name;
+
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    public void makeSound() {
+        System.out.println(name + " makes a sound.");
+    }
+
+    public void move() {
+        System.out.println(name + " moves in its own way.");
     }
 }
 
 
-class Dog extends Animal {
-    void makeSound() {
-        System.out.println("Dog barks");
+class Mammal extends Animal {
+    public Mammal(String name) {
+        super(name);
+    }
+
+    @Override
+    public void move() {
+        System.out.println(name + " walks on land.");
+    }
+
+    public void hasHair() {
+        System.out.println(name + " has hair or fur.");
+    }
+}
+
+
+class Dog extends Mammal {
+    private String breed;
+
+    public Dog(String name, String breed) {
+        super(name);
+        this.breed = breed;
+    }
+
+    @Override
+    public void makeSound() {
+        System.out.println(name + " barks. (" + breed + ")");
+    }
+
+    public void fetch() {
+        System.out.println(name + " loves to fetch sticks.");
+    }
+}
+
+
+class Dolphin extends Mammal {
+    public Dolphin(String name) {
+        super(name);
+    }
+
+    @Override
+    public void move() {
+        System.out.println(name + " swims in water.");
+    }
+
+    @Override
+    public void makeSound() {
+        System.out.println(name + " clicks and whistles.");
     }
 }
 
 public class InheritanceDemo {
     public static void main(String[] args) {
-        Dog dog = new Dog();
-        dog.makeSound(); // Output: Dog barks
+        System.out.println("=== Inheritance & Polymorphism Demo ===\n");
+
+        Animal genericAnimal = new Animal("GenericAnimal");
+        Mammal genericMammal = new Mammal("GenericMammal");
+        Dog myDog = new Dog("Bruno", "German Shepherd");
+        Dolphin dolphin = new Dolphin("Flippy");
+
+   
+        Animal[] animals = {genericAnimal, genericMammal, myDog, dolphin};
+
+        for (Animal a : animals) {
+            System.out.println("Class: " + a.getClass().getSimpleName());
+            a.makeSound();  // Polymorphism in action
+            a.move();
+            System.out.println();
+        }
+
+
+        myDog.hasHair();
+        myDog.fetch();
     }
 }
-
