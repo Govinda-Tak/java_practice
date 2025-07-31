@@ -1,34 +1,71 @@
+import java.util.ArrayList;
+import java.util.List;
+
 
 class Department {
-    String name;
+    private String name;
+    private String location;
+    private int floor;
 
-    Department(String name) {
+    public Department(String name, String location, int floor) {
         this.name = name;
+        this.location = location;
+        this.floor = floor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFullLocation() {
+        return location + " - Floor " + floor;
     }
 }
 
 
 class Employee {
-    String empName;
-    Department dept; // Association
+    private String empName;
+    private int empId;
+    private String designation;
+    private Department dept; // Association
 
-    Employee(String empName, Department dept) {
+    public Employee(int empId, String empName, String designation, Department dept) {
+        this.empId = empId;
         this.empName = empName;
+        this.designation = designation;
         this.dept = dept;
     }
 
-    void showDetails() {
-        System.out.println(empName + " works in " + dept.name + " department.");
+    public void showDetails() {
+        System.out.println("----------- Employee Info -----------");
+        System.out.println("ID          : " + empId);
+        System.out.println("Name        : " + empName);
+        System.out.println("Designation : " + designation);
+        System.out.println("Department  : " + dept.getName());
+        System.out.println("Location    : " + dept.getFullLocation());
+        System.out.println("-------------------------------------\n");
     }
 }
 
-
-
 public class AssociationDemo {
     public static void main(String[] args) {
-        Department d1 = new Department("IT");
-        Employee e1 = new Employee("Govinda", d1);
+     
+        Department it = new Department("IT", "Building A", 3);
+        Department hr = new Department("HR", "Building B", 2);
+        Department sales = new Department("Sales", "Building C", 4);
 
-        e1.showDetails(); 
+       
+        List<Employee> employees = new ArrayList<>();
+
+        employees.add(new Employee(101, "Govinda Tak", "Software Developer", it));
+        employees.add(new Employee(102, "Ramesh Pawar", "HR Executive", hr));
+        employees.add(new Employee(103, "Sonal Patil", "Sales Manager", sales));
+        employees.add(new Employee(104, "Megha Desai", "QA Engineer", it));
+        employees.add(new Employee(105, "Nitin Joshi", "Recruiter", hr));
+
+     
+        for (Employee emp : employees) {
+            emp.showDetails();
+        }
     }
 }
