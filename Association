@@ -1,0 +1,34 @@
+
+class Department {
+    String name;
+
+    Department(String name) {
+        this.name = name;
+    }
+}
+
+
+class Employee {
+    String empName;
+    Department dept; // Association
+
+    Employee(String empName, Department dept) {
+        this.empName = empName;
+        this.dept = dept;
+    }
+
+    void showDetails() {
+        System.out.println(empName + " works in " + dept.name + " department.");
+    }
+}
+
+
+
+public class AssociationDemo {
+    public static void main(String[] args) {
+        Department d1 = new Department("IT");
+        Employee e1 = new Employee("Govinda", d1);
+
+        e1.showDetails(); 
+    }
+}
